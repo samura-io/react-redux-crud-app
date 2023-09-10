@@ -1,0 +1,30 @@
+.element{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.element__input:disabled {
+    background-color: transparent;
+    border: none;
+    color: #000000;
+    font-size: 24px;
+    margin-top: -20px;
+    cursor: default;
+}
+
+.element__list {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 15px;
+}
+
+.element__alert {
+    position: fixed;
+    top: 0;
+    margin-top: 5px;
+}
