@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+# react-redux-crud-app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### GH-Pages: [Ссылка](https://samura-io.github.io/react-redux-crud-app/)
 
-## Available Scripts
+### Описание:
 
-In the project directory, you can run:
+Этот проект был разработан в рамках тестового задания, и его целью было создание React-приложения, обладающего следующими ключевыми функциональными возможностями:
+* CRUD-операции: Приложение позволяет выполнять операции создания (Create), чтения (Read), обновления (Update) и удаления (Delete) данных, обеспечивая полноценное взаимодействие с данными.
+* Авторизация и регистрация: Пользователи могут входить в систему с помощью учетных данных (авторизация) или создавать новые учетные записи (регистрация) для доступа к функционалу приложения.
+* Минимальный дизайн: Приложение имеет простой и минималистичный дизайн, что делает его удобным и легким в использовании.
+* Валидация полей форм: Все формы в приложении включают валидацию полей, что гарантирует правильный ввод данных пользователей.
+* Отображение списка данных: При открытии приложения, пользователям предоставляется список или таблица данных, с поддержкой сортировки, фильтрации и пагинации. Эти операции выполняются локально.
+* Авторизация для редактирования и удаления: Для выполнения операций редактирования или удаления данных, пользователи должны сначала авторизоваться или зарегистрироваться в системе.
+* Отдельная страница для отображения одного элемента: Приложение предоставляет страницу для отображения одного элемента, на которой можно редактировать данные элемента или удалить его.
 
-### `npm start`
+### Страницы:
+* Главная: Страница с отображением списка данных, с возможностью сортировки, фильтрации и пагинации.
+* Вход: Страница для авторизации пользователей.
+* Регистрация: Страница для создания новых учетных записей.
+* Страница выбранных данных: Отдельная страница для отображения одного элемента с возможностью редактирования и удаления.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Инструменты:
+* React и Redux Toolkit: Используются для создания и управления компонентами и состоянием приложения.
+* Ant Design: Используется для стилизации компонентов и создания минималистичного дизайна.
+* React Hook Form: Используется для управления формами и их валидации.
+* React Router DOM: Используется для навигации между страницами приложения.
+* API: Для взаимодействия с данными используется API, доступное по следующей ссылке: https://reqres.in/
