@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/react-redux-crud-app/static/css/main.373b190e.css",
-    "main.js": "/react-redux-crud-app/static/js/main.3d8a9bc5.js",
+    "main.css": "/react-redux-crud-app/static/css/main.3052b7f7.css",
+    "main.js": "/react-redux-crud-app/static/js/main.486a2f45.js",
     "static/media/Inter-Medium.woff?v=3.19": "/react-redux-crud-app/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
     "static/media/Inter-Medium.woff2?v=3.19": "/react-redux-crud-app/static/media/Inter-Medium.293fd13dbca5a3e450ef.woff2",
     "index.html": "/react-redux-crud-app/index.html",
-    "main.373b190e.css.map": "/react-redux-crud-app/static/css/main.373b190e.css.map",
-    "main.3d8a9bc5.js.map": "/react-redux-crud-app/static/js/main.3d8a9bc5.js.map"
+    "main.3052b7f7.css.map": "/react-redux-crud-app/static/css/main.3052b7f7.css.map",
+    "main.486a2f45.js.map": "/react-redux-crud-app/static/js/main.486a2f45.js.map"
   },
   "entrypoints": [
-    "static/css/main.373b190e.css",
-    "static/js/main.3d8a9bc5.js"
+    "static/css/main.3052b7f7.css",
+    "static/js/main.486a2f45.js"
   ]
 }
