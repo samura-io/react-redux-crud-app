@@ -2,28 +2,25 @@ import './App.css';
 import React from 'react';
 import Main from '../Main/Main';
 import Login from '../Login/Login';
-import { useDispatch } from 'react-redux';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import OneElement from '../OneElement/OneElement';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { setToken } from '../../store/slices/authSlice';
+import { useSelector, useDispatch} from 'react-redux';
+import { checkAuth } from '../../features/auth/auth-slice';
 
 function App () {
-  const dispatch = useDispatch();
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  console.log(isLoggedIn);
 
   React.useEffect(()=>{
-    checkAuth();
-}, [location]);
+    dispatch(checkAuth());
+}, [dispatch]);
 
-const checkAuth = () => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt === 'QpwL5tke4Pnpja7X4') {
-        dispatch(setToken({
-            jwt: jwt,
-        }))
-    };
+const checkAuth1 = () => {
 };
 
   return (
@@ -32,7 +29,7 @@ const checkAuth = () => {
         <Route path='/' element={ <Main/> } />
         <Route path='/signup' element={ <Register/> } />
         <Route path='/signin' element={ <Login/> } />
-        <Route path='/element' element={ <OneElement/> } />
+        <Route path='/user/:id' element={ <OneElement/> } />
         <Route path='*' element={ <NotFound/> } />
       </Routes>
     </div>

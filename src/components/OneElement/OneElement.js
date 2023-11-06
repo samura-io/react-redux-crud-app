@@ -1,94 +1,67 @@
 import "./OneElement.css";
 import React from "react";
-import api from "../../utils/Api";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { Button, Form, Input, Avatar} from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { setUser } from "../../store/slices/userSlice";
-import { Button, Form, Input, Avatar, Alert } from "antd";
+import { clearUserInfo, getUserInfo, deleteUser, editUsersInfo, editUser } from "../../features/user/user-slice";
+import CustomAlert from "../Alert/Alert";
 
 function OneElement() {
   const [isEdited, setIsEdited] = React.useState(false);
-  const loggedIn = useSelector((state) => state.auth.jwt);
-  const navigate = useNavigate();
+  const [renderedUserInfo, setRenderedUserInfo] = React.useState([]);
+  const [values, setValues] = React.useState([])
+  const { id } = useParams();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
-  const [visible, setVisible] = React.useState(false);
-  const [alert, setAlert] = React.useState({});
-  const [defaultValues, setDefaultValues] = React.useState([
-    {
-      name: ["email"],
-      value: user.email,
-    },
-    {
-      name: ["first_name"],
-      value: user["first_name"],
-    },
-    {
-      name: ["last_name"],
-      value: user["last_name"],
-    },
-  ]);
-  const [fields, setFields] = React.useState(defaultValues);
+  const navigate = useNavigate();
+  const loggedIn = useSelector(state=>state.auth.isLoggedIn);
+  
+  const userInfo = useSelector(state => state.user);
+
+  const handleReturn = () => {
+    dispatch(clearUserInfo());
+  }
 
   const onChange = (newFields) => {
-    setFields(newFields);
+    setValues(newFields);
   };
 
   const handleDelete = () => {
-    api
-      .deleteUser(user.id)
-      .then((res) => {
-        setVisible(true);
-        setAlert({
-          message: "Пользователь успешно удален!",
-          type: "info",
-        });
-        setTimeout(() => {
-          setVisible(false);
-          setAlert({});
-          navigate("/", { replace: true });
-        }, 2000);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(deleteUser(id));
+    setTimeout(()=>{
+      navigate(-1);
+    }, 2000)
   };
 
   React.useEffect(() => {
-    !fields[0].value && navigate("/");
-  }, []);
+    dispatch(getUserInfo(id));
+  }, [dispatch]);
 
-  const onFinish = (values) => {
-    api
-      .updateUserInfo(
-        values["first_name"],
-        values["first_name"],
-        values.email,
-        user.id,
-        user.avatar
-      )
-      .then((res) => {
-        dispatch(
-          setUser({
-            user: res,
-          })
-        );
-        setDefaultValues(fields);
-        setVisible(true);
-        setAlert({
-          message: "Данные пользователя успешно изменены!",
-          type: "success",
+  React.useEffect(() => {
+    setRenderedUserInfo([
+      {
+        name: "email",
+        value: userInfo.email,
+      },
+      {
+        name: "first_name",
+        value: userInfo.firstName,
+      },
+      {
+        name: "last_name",
+        value: userInfo.lastName,
+      },
+  ])
+  }, [userInfo]);
+
+  const onFinish = () => {
+        let newInfo = {};
+        values.forEach((i)=>{
+          newInfo[i.name] = i.value;
         });
-        setTimeout(() => {
-          setVisible(false);
-          setAlert({});
-        }, 2000);
+        dispatch(editUsersInfo(newInfo));
+        dispatch(editUser({id, newInfo}))
         setIsEdited(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -96,17 +69,10 @@ function OneElement() {
 
   return (
     <div className="element">
-      {visible && (
-        <Alert
-          className="element__alert"
-          message={alert.message}
-          type={alert.type}
-        />
-      )}
       <Avatar
         shape="circle"
         size={150}
-        src={user.avatar}
+        src={userInfo.avatar}
         style={{ marginBottom: 50, marginTop: 50 }}
       />
       <Form
@@ -121,7 +87,7 @@ function OneElement() {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
-        fields={fields}
+        fields={renderedUserInfo}
         onFieldsChange={(_, allFields) => {
           onChange(allFields);
         }}
@@ -183,7 +149,7 @@ function OneElement() {
             span: 24,
           }}
         >
-          <Link className="element__list" to="/">
+          <Link className="element__list" to="/" onClick={handleReturn}>
             ← вернуться к списку
           </Link>
           {isEdited && (
@@ -201,7 +167,6 @@ function OneElement() {
                 style={{ width: 300, marginTop: 10 }}
                 onClick={() => {
                   setIsEdited(false);
-                  setFields(defaultValues);
                 }}
               >
                 Отмена
@@ -235,6 +200,11 @@ function OneElement() {
           </Button>
         </>
       )}
+      
+      <CustomAlert
+      message={userInfo.message}
+      type={userInfo.type}
+      willDisappear={true} />
     </div>
   );
 }

@@ -1,24 +1,19 @@
 import { Menu } from "antd";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { removeToken } from "../../store/slices/authSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from '../../features/auth/auth-slice'
 
 function Navigation() {
-  const loggedIn = useSelector((state) => state.auth.jwt);
-  const dispatch = useDispatch();
   const [current, setCurrent] = useState("email");
+  const dispatch = useDispatch();
+  const loggedIn = useSelector(state => state.auth.isLoggedIn);
   const onClick = (e) => {
     setCurrent(e.key);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("jwt");
-    dispatch(
-      removeToken({
-        jwt: null,
-      })
-    );
+    dispatch(logout());
   };
 
   const items = [

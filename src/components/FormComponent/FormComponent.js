@@ -1,6 +1,7 @@
 import React from "react";
 import './FormComponent.css'
-import { Button, Form, Input, Alert } from "antd";
+import { Button, Form, Input } from "antd";
+import CustomAlert from "../Alert/Alert";
 import { useNavigate } from "react-router-dom";
 
 function FormComponent({ buttonPlaceholder, onSubmit }) {
@@ -17,7 +18,8 @@ function FormComponent({ buttonPlaceholder, onSubmit }) {
   return (
     <>
     {showAlert && (
-      <Alert className="form__alert"
+      <CustomAlert
+      
       message={(
         <>
           REST-API хост reqres.in, предоставляет только одного пользователя для регистрации и входа. Пожалуйста, воспользуйтесь ими:<br />
@@ -26,7 +28,6 @@ function FormComponent({ buttonPlaceholder, onSubmit }) {
         </>
       )}
       type="warning"
-      closable
     />
     )}
     <Form

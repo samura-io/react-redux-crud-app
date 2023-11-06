@@ -1,46 +1,36 @@
 import React from "react";
-import api from "../../utils/Api";
 import { Pagination, Space } from "antd";
-import { useDispatch } from "react-redux";
-import { setUsersList } from "../../store/slices/usersSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { loadUsersList } from "features/users/users-slice";
 
 function Paginator() {
+
+
+  const usersInfo = useSelector(state => state.users);
+  const isLoading = useSelector(state => state.users.isLoading);
+  
   const dispatch = useDispatch();
-  const [defaultCurrentPage, setDefaultCurrentPage] = React.useState(1);
-
-  React.useEffect(() => {
-    getListAndSet(1);
-  }, []);
-
-  const getListAndSet = (page) => {
-    api
-      .getUsersList(page)
-      .then((res) => {
-        const list = res.data.map((elem) => ({ ...elem, key: elem.id }));
-        dispatch(
-          setUsersList({
-            list: list,
-          })
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const handleChange = (page) => {
-    getListAndSet(page);
+    localStorage.setItem('page', page);
+    dispatch(loadUsersList(localStorage.getItem('page')));
   };
 
   return (
     <>
+    {usersInfo.page && (
       <Space align="center" direction="vertical" style={{ width: "100%" }}>
-        <Pagination
-          defaultCurrent={defaultCurrentPage}
-          total={20}
+        { !isLoading && 
+          <Pagination
+          total={usersInfo.list.length * usersInfo.totalPages}
+          defaultCurrent={usersInfo.page}
           onChange={handleChange}
+          defaultPageSize = {usersInfo.list.length}
         />
+        }
+
       </Space>
+    )}
     </>
   );
 }

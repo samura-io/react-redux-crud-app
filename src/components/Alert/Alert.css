@@ -1,0 +1,9 @@
+.alert {
+    z-index: 999;
+    max-width: 300px;
+    position: fixed;
+    top: 0;
+    margin: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}

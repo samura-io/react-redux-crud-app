@@ -1,26 +1,30 @@
 import "./Register.css";
 import React from "react";
-import api from "../../utils/Api";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector} from "react-redux";
 import FormComponent from "../FormComponent/FormComponent";
+import { registration } from "../../features/auth/auth-slice";
+import CustomAlert from "components/Alert/Alert";
 
 function Register() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth);
 
   const handleRegister = (values) => {
-    api
-      .register(values.email, values.password)
-      .then((res) => {
-        localStorage.setItem("jwt", res.token);
-        navigate("/", { replace: true });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(registration(values))
   };
+
+  React.useEffect(()=>{
+    auth.isLoggedIn && navigate('/');
+  }, [auth])
 
   return (
     <div className="rigister">
+      <CustomAlert 
+        type={auth.type}
+        message={auth.message}
+      />
       <h2 className="register__title">Регистрация</h2>
       <FormComponent
         buttonPlaceholder="Зарегистрироваться"
