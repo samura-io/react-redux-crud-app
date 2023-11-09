@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 # react-redux-crud-app
 
 ### GH-Pages: [Ссылка](https://samura-io.github.io/react-redux-crud-app/)
